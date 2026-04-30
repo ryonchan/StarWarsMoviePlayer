@@ -1,0 +1,67 @@
+# Copyright (c) 2025 Nathan Greenfield. All rights reserved
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+!ITPLib.lib
+!libITPlib.a
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Mac files
+*.xcodeproj/
+.DS_Store
+*~
+diff.txt
+
+# PC files
+*.sln
+*.vcxproj
+*.db
+*.suo
+*.sdf
+Release/
+Debug/
+.vs/*
+!.vs/launch.vs.json
+
+# CMake files
+build/
+CMakeScripts/
+cmake_install.cmake
+CMakeFiles/
+CMakeCache.txt
+
+# Output files
+output/*
+out
+!output
+!output/readme.txt
+
+# CS20A specific files
+GradeReport.md
+diagnostics.json
+tidy-annotations.json
