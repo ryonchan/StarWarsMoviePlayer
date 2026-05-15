@@ -1,8 +1,8 @@
 // Copyright (c) 2025 Nathan Greenfield. All rights reserved
 #pragma once
-
 #include <string>
-#include "SMCDoubleList.hpp"
+#include "smcList.hpp"
+#include <fstream>
 
 class MoviePlayer
 {
@@ -13,8 +13,8 @@ public:
 	// Returns: Nothing
 	MoviePlayer(std::string);
 
-	// Function: Destructor
-	// Purpose: Empties the list
+	// Function: Parameterized Constructor
+	// Purpose: Sets member variables to input, clears list, and calls loader
 	// Input: None
 	// Returns: Nothing
 	~MoviePlayer();
@@ -90,7 +90,7 @@ private:
 	void loadTape();
 
 	// Holds the current frame the film is on
-	unsigned mCurrFrameNum;
+	unsigned currFrameNum;
 
 	// Stores the name of the input file
 	// that has the ASCII film in it
@@ -102,7 +102,7 @@ private:
 	smcList<std::string> mFilm;
 
 	// Stores the current position of the reader
-	smcList<std::string>::Iterator mPos;
+	smcList<std::string>::iterator pos;
 
 	// DON'T CHANGE THIS!
 	const unsigned FRAMESIZE = 13;
