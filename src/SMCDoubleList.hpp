@@ -1,5 +1,6 @@
 // Copyright (c) 2025 Nathan Greenfield. All rights reserved
 #pragma once
+#include <sstream>
 
 template <typename T>
 class smcList
@@ -37,73 +38,81 @@ public:
 		// Constructors
 		Iterator()
 		{
-			// TODO: Fill in
+			mCurr = nullptr;
 		}
 
-		Iterator(Node* inCurr)
+		Iterator(Node* inCurr) //parameterized constructor
 		{
-			// TODO: Fill in
+			mCurr = inCurr;
 		}
 
-		Iterator(const Iterator& src)
+		Iterator(const Iterator& src) //copy constructor
 		{
-			// TODO: Fill in
+			mCurr = src.mCurr;
 		}
 
-		// Assignment
+		// Assignment operator
 		Iterator& operator=(const Iterator& src)
 		{
-			// TODO: Fill in
-			return *(new Iterator); // FIX RETURN VALUE
+			mCurr = src.mCurr;
+			return *this; 
 		}
 
 		// Incrementors / Decrementors
 		// ++i
 		Iterator& operator++()
 		{
-			// TODO: Fill in
-			return *(new Iterator); // FIX RETURN VALUE
+			mCurr = mCurr -> mNext;
+			return *this;
 		}
 
 		// i++
 		Iterator operator++(int)
 		{
-			// TODO: Fill in
-			return *(new Iterator); // FIX RETURN VALUE
+			Iterator copy = *this;
+			mCurr = mCurr -> mNext;
+			return copy; 
 		}
 
 		// --i
 		Iterator& operator--()
 		{
-			// TODO: Fill in
-			return *(new Iterator); // FIX RETURN VALUE
+			mCurr = mCurr -> mPrev;
+			return *this; 
 		}
 
 		// i--
 		Iterator operator--(int)
 		{
-			// TODO: Fill in
-			return *(new Iterator); // FIX RETURN VALUE
+			Iterator copy = *this; //make a copy of the current object
+			mCurr = mCurr -> mPrev; //shift the node pointer of current element to prev
+			return copy; 
 		}
 
 		// Dereference
 		T& operator*() const
 		{
-			// TODO: Fill in
-			return *(new T()); // FIX RETURN VALUE
+			return mCurr -> mData; //dereference mCurr and access
 		}
 
 		Node* operator->() const
 		{
-			// TODO: Fill in
-			return *(new Node); // FIX RETURN VALUE
+			return mCurr; // -> removes the need to put * in front of the object
 		}
 
 		// Comparison
-		bool operator==(const Iterator& rhs) const
+		bool operator==(const Iterator& rhs) const //right hand side
 		{
 			// TODO: Fill in
-			return false; // FIX RETURN VALUE
+
+			if(*this.mCurr == rhs.mCurr)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		bool operator!=(const Iterator& rhs) const
@@ -121,7 +130,9 @@ public:
 	// Returns: Nothing
 	smcList()
 	{
-		// TODO: Fill in
+		mHead = nullptr;
+		mTail = nullptr;
+		mSize = 0;
 	}
 
 	// Function: Copy Constructor
@@ -148,7 +159,10 @@ public:
 	// Returns: Nothing
 	void clear()
 	{
-		// TODO: Fill in
+		mHead = nullptr;
+		mTail = nullptr;
+		mSize = 0;
+
 	}
 
 	// Assignment Operator
@@ -168,8 +182,7 @@ public:
 	// Returns: size of the list
 	unsigned size() const
 	{
-		// TODO: Fill in
-		return 0; // FIX RETURN VALUE
+		return mSize;
 	}
 
 	// Function: push_front
@@ -276,8 +289,21 @@ public:
 	// Output: Stream after values are written
 	friend std::ostream& operator<<(std::ostream& os, const smcList<T>& list)
 	{
-		// TODO: Fill in
-		return os; // FIX RETURN VALUE
+		os << "{";
+		Iterator i = list.begin(); //i now references the first element of the list
+		for(i; i != list.end(); i++)
+		{
+			os << *i;
+			Iterator next = i; 
+			next++;
+			if(next != list.end())
+			{
+				os << ", ";
+			}
+		}
+		os << "}";
+		
+		return os;
 	}
 
 	// Function: toString
@@ -286,8 +312,10 @@ public:
 	// Output: String (in the format as the ostream)
 	std::string toString() const
 	{
-		// TODO: Fill in
-		return *(new std::string); // FIX RETURN VALUE
+		std::stringstream listString;
+		listString << *this; //understand this
+
+		return listString.str();
 	}
 
 	// Function: toReverseString
@@ -295,8 +323,23 @@ public:
 	// Input: None
 	// Output: String in reverse
 	std::string toReverseString() const
-	{
-		// TODO: Fill in
-		return *(new std::string); // FIX RETURN VALUE
+	{	
+		std::stringstream listString;
+		listString << "{";
+		Iterator i = end();
+		--i;  //start at last element
+		while (true)
+		{
+			listString << *i;
+			if (i == begin())
+			{
+				break;
+			}
+			listString << ", ";
+			--i;
+		}
+		listString << "}";
+
+		return listString.str();
 	}
 };

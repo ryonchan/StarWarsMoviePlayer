@@ -1,7 +1,7 @@
 // Copyright (c) 2025 Nathan Greenfield. All rights reserved
 #pragma once
 #include <string>
-#include "smcList.hpp"
+#include "SMCDoubleList.hpp"
 #include <fstream>
 
 class MoviePlayer
