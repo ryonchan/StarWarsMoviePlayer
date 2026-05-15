@@ -3,8 +3,8 @@
 
 ### EDIT BELOW
 
-Name: Nathan Greenfield
+Name: Ryon Chan
 
-Email: greenfield_nathan@smc.edu
+Email: chan_ryon01@student.smc.edu
 
-Platform: PC / Mac
+Platform: MAC
