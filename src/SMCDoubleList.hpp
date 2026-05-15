@@ -103,9 +103,7 @@ public:
 		// Comparison
 		bool operator==(const Iterator& rhs) const //right hand side
 		{
-			// TODO: Fill in
-
-			if(*this.mCurr == rhs.mCurr)
+			if(this -> mCurr == rhs.mCurr)
 			{
 				return true;
 			}
@@ -117,8 +115,14 @@ public:
 
 		bool operator!=(const Iterator& rhs) const
 		{
-			// TODO: Fill in
-			return false; // FIX RETURN VALUE
+			if(this -> mCurr != rhs.mCurr)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	};
 

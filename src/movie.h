@@ -102,7 +102,7 @@ private:
 	smcList<std::string> mFilm;
 
 	// Stores the current position of the reader
-	smcList<std::string>::iterator pos;
+	smcList<std::string>::Iterator pos;
 
 	// DON'T CHANGE THIS!
 	const unsigned FRAMESIZE = 13;
