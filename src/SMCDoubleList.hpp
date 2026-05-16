@@ -465,8 +465,8 @@ public:
 	// Output: String (in the format as the ostream)
 	std::string toString() const
 	{
-		std::stringstream listString;
-		listString << *this; //understand this
+		std::stringstream listString; 
+		listString << *this; //write current list to string
 
 		return listString.str();
 	}
@@ -477,6 +477,10 @@ public:
 	// Output: String in reverse
 	std::string toReverseString() const
 	{	
+		if(mSize == 0)
+		{
+			return "{}";
+		}
 		std::stringstream listString;
 		listString << "{";
 		Iterator i = end();
