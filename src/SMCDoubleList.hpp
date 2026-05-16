@@ -471,20 +471,20 @@ public:
 	{	
 		std::stringstream listString;
 		listString << "{";
-		Node* temp = mTail;
+		Node* newNode = mTail;
 	
-		while (temp != nullptr)
+		while (newNode != nullptr)
 		{
-			if (temp -> mPrev != nullptr)
+			if (newNode -> mPrev != nullptr)
 			{
-				stream << temp -> mData << ",";
+				listString << newNode -> mData << ",";
 			}
 			else
 			{
-				stream << temp -> mData;
+				listString << newNode -> mData;
 			}
 
-			temp = temp -> mPrev;
+			newNode = newNode -> mPrev;
 		}
 
 		listString << "}";
