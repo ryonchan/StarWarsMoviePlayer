@@ -341,14 +341,14 @@ public:
 	// Returns: Iterator pointing to beginning of list
 	Iterator begin() const
 	{
-		if (mHead == nullptr)
-		{
-			return Iterator(nullptr);
-		}
-		else
-		{
+		// if (mHead == nullptr)
+		// {
+		// 	return Iterator(nullptr);
+		// }
+		// else
+		// {
 			return Iterator(mHead); //points to head node
-		}
+		// }
 	}
 
 	// Function: end
@@ -357,14 +357,14 @@ public:
 	// Returns: Iterator pointing to end of list
 	Iterator end() const
 	{
-		if(mTail == nullptr)
-		{
-			return Iterator(nullptr);
-		}
-		else
-		{
+		// if(mTail == nullptr)
+		// {
+		// 	return Iterator(nullptr);
+		// }
+		// else
+		// {
 			return Iterator(mTail -> mNext); //points to one past the tail node
-		}
+		// }
 	}
 
 	// Function: erase
@@ -481,6 +481,7 @@ public:
 		{
 			return "{}";
 		}
+		
 		std::stringstream listString;
 		listString << "{";
 		Iterator i = end();
