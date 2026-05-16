@@ -145,7 +145,15 @@ public:
 	// Returns: Nothing
 	smcList(const smcList& other)
 	{
-		// TODO: Fill in
+		mSize = 0;
+		mHead = nullptr;
+		mTail = nullptr;
+		Node* newNode = other.mHead; //create node that points to head node in "other"
+		while (newNode != nullptr) 
+		{
+			push_back(newNode -> mData); //pushback data from every node
+			newNode = newNode -> mNext; //set temp to next node
+		}
 	}
 
 	// Function: Destructor
@@ -154,7 +162,7 @@ public:
 	// Returns: Nothing
 	~smcList()
 	{
-		// TODO: Fill in
+		clear(); //calls clear function
 	}
 
 	// Function: clear
@@ -163,10 +171,10 @@ public:
 	// Returns: Nothing
 	void clear()
 	{
-		mHead = nullptr;
-		mTail = nullptr;
-		mSize = 0;
-
+		while(mSize > 0)
+		{
+			pop_front(); //remove every element until list size is 0
+		}
 	}
 
 	// Assignment Operator
@@ -176,8 +184,14 @@ public:
 	// Returns: *this
 	smcList& operator=(const smcList& other)
 	{
-		// TODO: Fill in
-		return *(new smcList); // FIX RETURN VALUE
+		clear();
+		Node* newNode = other.mHead; //create temp that points to head node in "other"
+		while(newNode != nullptr)
+		{
+			push_back(newNode -> mData); //push_back temp's data into the list
+			newNode = newNode -> mNext; //advance temp to next node
+		}
+		return *this;
 	}
 
 	// Function: size
@@ -195,7 +209,20 @@ public:
 	// Returns: Nothing
 	void push_front(const T& value)
 	{
-		// TODO: Fill in
+		Node* newNode = new Node(); //create a new node
+		newNode -> mData = value; //equate node's mData to value
+		newNode -> mNext = mHead; //equate new node's next to mHead
+		newNode -> mPrev = nullptr; //equate new node's prev to nullptr
+		if (mSize == 0)
+		{
+			mTail = newNode; //if size is 0, tail is new node
+		}
+		else
+		{
+			mHead -> mPrev = newNode; //otherwise, set prev of current head to new node
+		}
+		mHead = newNode; //equate new node memory to mHead
+		mSize += 1; //increase mSize by 1
 	}
 
 	// Function: front
@@ -204,8 +231,14 @@ public:
 	// Returns: Value of the node at the front of the list
 	T& front()
 	{
-		// TODO: Fill in
-		return *(new T()); // FIX RETURN VALUE
+		if(mSize == 0)
+		{
+			throw std::out_of_range("Error: List is empty!");
+		}
+		else
+		{
+			return mHead -> mData;
+		}
 	}
 
 	// Function: pop_front
@@ -214,7 +247,25 @@ public:
 	// Returns: None
 	void pop_front()
 	{
-		// TODO: Fill in
+		if(mSize == 0)
+		{
+			throw std::out_of_range("Error: List is empty!");
+		}
+		else if (mSize == 1) //if size is 1, delete headnode, set head/tail to null, size to 0
+		{
+			delete mHead; 
+			mHead = nullptr;
+			mTail = nullptr;
+			mSize = 0;
+		}
+		else
+		{
+			Node* copy = mHead -> mNext; //make a copy of next node
+			delete mHead; 
+			mHead = copy; //next node becomes mHead
+			mHead -> mPrev = nullptr; //mHead previous is nullptr by default
+			mSize -= 1;
+		}
 	}
 
 	// Function: push_back
@@ -223,7 +274,20 @@ public:
 	// Returns: Nothing
 	void push_back(const T& value)
 	{
-		// TODO: Fill in;
+		Node* newNode = new Node();
+		newNode -> mData = value; //set its data to value
+		newNode -> mPrev = mTail; //set its previous to current tail
+		newNode -> mNext = nullptr; //set the next to null
+		if (mSize == 0)
+		{
+			mHead = newNode;
+		}
+		else
+		{ 
+			mTail -> mNext = newNode; //set the next of the current tail to new node
+			mTail = newNode; //set the tail to new node
+		}
+		mSize += 1;
 	}
 
 	// Function: back
@@ -232,8 +296,14 @@ public:
 	// Returns: Value of the node at the front of the list
 	T& back()
 	{
-		// TODO: Fill in
-		return *(new T()); // FIX RETURN VALUE
+		if(mSize == 0)
+		{
+			throw std::out_of_range("Error: List is empty!");
+		}
+		else
+		{
+			return mTail -> mData;
+		}
 	}
 
 	// Function: pop_back
@@ -242,7 +312,26 @@ public:
 	// Returns: None
 	void pop_back()
 	{
-		// TODO: Fill in;
+
+		if (mSize == 0)
+		{
+			throw std::out_of_range("Error: List is empty!");
+		}
+		else if (mSize == 1)
+		{ 
+			delete mTail;
+			mHead = nullptr;
+			mTail = nullptr;
+			mSize = 0;
+		}
+		else
+		{
+			Node* newNode = mTail -> mPrev; //temp equal to prev node before tail
+			delete mTail;
+			mTail = newNode; //temp is now new tail
+			mTail -> mNext = nullptr;
+			mSize -= 1;
+		}
 	}
 
 	// Function: begin
@@ -251,8 +340,7 @@ public:
 	// Returns: Iterator pointing to beginning of list
 	Iterator begin() const
 	{
-		// TODO: Fill in
-		return *(new Iterator); // FIX RETURN VALUE
+		return Iterator(mHead); //points to head node
 	}
 
 	// Function: end
@@ -261,8 +349,7 @@ public:
 	// Returns: Iterator pointing to end of list
 	Iterator end() const
 	{
-		// TODO: Fill in
-		return *(new Iterator); // FIX RETURN VALUE
+		return Iterator(mTail -> mNext); //points to one past the tail node
 	}
 
 	// Function: erase
@@ -271,8 +358,30 @@ public:
 	// Returns: A new iterator pointing to the node after the removed item
 	Iterator erase(Iterator& i)
 	{
-		// TODO: Fill in
-		return *(new Iterator); // FIX RETURN VALUE
+		if(i.mCurr == nullptr) //if iterator is invalid
+		{
+			throw std::out_of_range("Error: Iterator is invalid!");
+		}
+		else if(i == begin()) //if iterator is at begin
+		{
+			pop_front();
+			return begin();
+		}
+		else if(i == Iterator(mTail)) //if iterator is at the tail
+		{
+			pop_back();
+			return end();
+		}
+		else
+		{
+			Node* after = i.mCurr -> mNext; //after pointer
+			Node* before = i.mCurr -> mPrev; //before pointer
+			delete i.mCurr;
+			before -> mNext = after; //set before's next to after
+			after -> mPrev = before; //set after's previous to before
+			mSize -= 1;
+			return Iterator(after);
+		}
 	}
 
 	// Function: insert
@@ -281,8 +390,33 @@ public:
 	// Returns: A new iterator pointing to the inserted value
 	Iterator insert(Iterator& i, const T& val)
 	{
-		// TODO: Fill in
-		return *(new Iterator); // FIX RETURN VALUE
+		if(i.mCurr == nullptr) //if iterator is invalid
+		{
+			throw std::out_of_range("Error: Iterator is invalid!");
+		}
+		else if(i == begin()) //if iterator is at begin
+		{
+			push_front(val);
+			return begin();
+		}
+		else if(i == end()) //if iterator is at end
+		{
+			push_back(val);
+			return Iterator(mTail);
+		}
+		else
+		{
+			Node* after = i.mCurr; //after pointer
+			Node* before = after -> mPrev; //before pointer
+			Node* newNode = new Node(); //dynamically allocate new node
+			newNode -> mData = val; //data to val
+			newNode -> mPrev = before; //prev to before
+			newNode -> mNext = after; //next to after
+			before -> mNext = newNode; //for the node before, mNext should be newNode
+			after -> mPrev = newNode; //for the node after, mPrev should be newNode
+			mSize += 1;
+			return Iterator(newNode);
+		}
 	}
 
 public:
