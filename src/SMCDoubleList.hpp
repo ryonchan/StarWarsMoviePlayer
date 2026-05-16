@@ -451,7 +451,7 @@ public:
 			next++;
 			if(next != list.end())
 			{
-				os << ", ";
+				os << ",";
 			}
 		}
 		os << "}";
@@ -488,7 +488,7 @@ public:
 			{
 				break;
 			}
-			listString << ", ";
+			listString << ",";
 			--i;
 		}
 		listString << "}";
