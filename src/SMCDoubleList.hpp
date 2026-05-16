@@ -478,10 +478,6 @@ public:
 	// Output: String in reverse
 	std::string toReverseString() const
 	{	
-		if(mSize == 0)
-		{
-			return "{}";
-		}
 		std::stringstream listString;
 		listString << "{";
 		Iterator i = end();
