@@ -341,7 +341,14 @@ public:
 	// Returns: Iterator pointing to beginning of list
 	Iterator begin() const
 	{
-		return Iterator(mHead); //points to head node
+		if (mHead == nullptr)
+		{
+			return Iterator(nullptr);
+		}
+		else
+		{
+			return Iterator(mHead); //points to head node
+		}
 	}
 
 	// Function: end
@@ -350,7 +357,14 @@ public:
 	// Returns: Iterator pointing to end of list
 	Iterator end() const
 	{
-		return Iterator(mTail -> mNext); //points to one past the tail node
+		if(mTail == nullptr)
+		{
+			return Iterator(nullptr);
+		}
+		else
+		{
+			return Iterator(mTail -> mNext); //points to one past the tail node
+		}
 	}
 
 	// Function: erase
