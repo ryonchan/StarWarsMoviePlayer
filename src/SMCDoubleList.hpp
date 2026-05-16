@@ -2,6 +2,7 @@
 #pragma once
 #include <sstream>
 #include <iostream>
+#include <stdexcept>
 
 template <typename T>
 class smcList
