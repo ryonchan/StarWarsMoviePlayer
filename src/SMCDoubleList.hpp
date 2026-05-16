@@ -1,6 +1,7 @@
 // Copyright (c) 2025 Nathan Greenfield. All rights reserved
 #pragma once
 #include <sstream>
+#include <iostream>
 
 template <typename T>
 class smcList
@@ -341,14 +342,14 @@ public:
 	// Returns: Iterator pointing to beginning of list
 	Iterator begin() const
 	{
-		// if (mHead == nullptr)
-		// {
-		// 	return Iterator(nullptr);
-		// }
-		// else
-		// {
+		if (mHead == nullptr)
+		{
+			return Iterator(nullptr);
+		}
+		else
+		{
 			return Iterator(mHead); //points to head node
-		// }
+		}
 	}
 
 	// Function: end
@@ -357,14 +358,14 @@ public:
 	// Returns: Iterator pointing to end of list
 	Iterator end() const
 	{
-		// if(mTail == nullptr)
-		// {
-		// 	return Iterator(nullptr);
-		// }
-		// else
-		// {
+		if(mTail == nullptr)
+		{
+			return Iterator(nullptr);
+		}
+		else
+		{
 			return Iterator(mTail -> mNext); //points to one past the tail node
-		// }
+		}
 	}
 
 	// Function: erase
@@ -446,7 +447,7 @@ public:
 		Iterator i = list.begin(); //i now references the first element of the list
 		for(i; i != list.end(); i++)
 		{
-			os << *i;
+			os << *i; //*i obtains the data at the particular node of the iterator
 			Iterator next = i; 
 			next++;
 			if(next != list.end())
@@ -481,7 +482,6 @@ public:
 		{
 			return "{}";
 		}
-		
 		std::stringstream listString;
 		listString << "{";
 		Iterator i = end();
