@@ -71,9 +71,9 @@ public:
 		// i++
 		Iterator operator++(int)
 		{
-			Iterator copy = *this;
+			Iterator i(*this);
 			mCurr = mCurr -> mNext;
-			return copy; 
+			return *this; 
 		}
 
 		// --i
@@ -86,9 +86,9 @@ public:
 		// i--
 		Iterator operator--(int)
 		{
-			Iterator copy = *this; //make a copy of the current object
+			Iterator i(*this); //make a copy of the current object
 			mCurr = mCurr -> mPrev; //shift the node pointer of current element to prev
-			return copy; 
+			return *this; 
 		}
 
 		// Dereference
@@ -283,13 +283,12 @@ public:
 		if (mSize == 0)
 		{
 			mHead = newNode;
-			mTail = newNode;
 		}
 		else
 		{ 
 			mTail -> mNext = newNode; //set the next of the current tail to new node
-			mTail = newNode; //set the tail to new node
 		}
+		mTail = newNode; //set the tail to new node
 		mSize += 1;
 	}
 
@@ -332,7 +331,7 @@ public:
 			Node* newNode = mTail -> mPrev; //temp equal to prev node before tail
 			delete mTail;
 			mTail = newNode; //temp is now new tail
-			mTail -> mNext = nullptr;
+			newNode -> mNext = nullptr;
 			mSize -= 1;
 		}
 	}
@@ -343,14 +342,7 @@ public:
 	// Returns: Iterator pointing to beginning of list
 	Iterator begin() const
 	{
-		if (mHead == nullptr)
-		{
-			return Iterator(nullptr);
-		}
-		else
-		{
-			return Iterator(mHead); //points to head node
-		}
+		return Iterator(mHead); //points to head node
 	}
 
 	// Function: end
@@ -359,14 +351,7 @@ public:
 	// Returns: Iterator pointing to end of list
 	Iterator end() const
 	{
-		if(mTail == nullptr)
-		{
-			return Iterator(nullptr);
-		}
-		else
-		{
-			return Iterator(mTail -> mNext); //points to one past the tail node
-		}
+		return Iterator(mTail -> mNext); //points to one past the tail node
 	}
 
 	// Function: erase
@@ -384,7 +369,7 @@ public:
 			pop_front();
 			return begin();
 		}
-		else if(i == Iterator(mTail)) //if iterator is at the tail
+		else if(i.mCurr == mTail) //if iterator is at the tail
 		{
 			pop_back();
 			return end();
@@ -393,7 +378,8 @@ public:
 		{
 			Node* after = i.mCurr -> mNext; //after pointer
 			Node* before = i.mCurr -> mPrev; //before pointer
-			delete i.mCurr;
+			Node* toDel = i.mCurr;
+			delete toDel;
 			before -> mNext = after; //set before's next to after
 			after -> mPrev = before; //set after's previous to before
 			mSize -= 1;
