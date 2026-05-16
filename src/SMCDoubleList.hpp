@@ -431,17 +431,21 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const smcList<T>& list)
 	{
 		os << "{";
-		Iterator i = list.begin(); //i now references the first element of the list
-		for(i; i != list.end(); i++)
+		Node* newNode = list.mHead; //pointer that stores address of head node
+		while (newNode != nullptr)
 		{
-			os << *i; //*i obtains the data at the particular node of the iterator
-			Iterator next = i; 
-			next++;
-			if(next != list.end())
+			if (newNode -> mNext != nullptr)
 			{
-				os << ",";
+				os << newNode -> mData << ",";
 			}
+			else
+			{
+				os << newNode -> mData;
+			}
+			
+			newNode = newNode -> mNext;
 		}
+		
 		os << "}";
 		
 		return os;
@@ -467,18 +471,22 @@ public:
 	{	
 		std::stringstream listString;
 		listString << "{";
-		Iterator i = end();
-		--i;  //start at last element
-		while (true)
+		Node* temp = mTail;
+	
+		while (temp != nullptr)
 		{
-			listString << *i;
-			if (i == begin())
+			if (temp -> mPrev != nullptr)
 			{
-				break;
+				stream << temp -> mData << ",";
 			}
-			listString << ",";
-			--i;
+			else
+			{
+				stream << temp -> mData;
+			}
+
+			temp = temp -> mPrev;
 		}
+
 		listString << "}";
 
 		return listString.str();
