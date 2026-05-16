@@ -7,7 +7,8 @@ extern bool CheckTextFilesSame(const std::string& fileNameA, const std::string& 
 TEST_CASE("Student tests", "[student]")
 {
 	// Complete tests are worth 2 points for each test
-
+ 
+	
 	SECTION("Default constructor, size, and destructor")
 	{
 		// TODO: Tests go here
