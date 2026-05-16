@@ -281,6 +281,7 @@ public:
 		if (mSize == 0)
 		{
 			mHead = newNode;
+			mTail = newNode;
 		}
 		else
 		{ 
