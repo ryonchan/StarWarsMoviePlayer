@@ -1,4 +1,3 @@
-// Copyright (c) 2025 Nathan Greenfield. All rights reserved
 #include <iostream>
 #include <string>
 #include <sstream>
