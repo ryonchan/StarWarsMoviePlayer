@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# Copyright (c) 2025 Nathan Greenfield. All rights reserved
-
 import json
 import os
 	
