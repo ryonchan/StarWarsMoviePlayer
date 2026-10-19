@@ -1,5 +1,3 @@
-# Copyright (c) 2025 Nathan Greenfield. All rights reserved
-
 # Require CMAKE 3.20 or higher
 cmake_minimum_required(VERSION 3.20)
 
