@@ -1,4 +1,3 @@
-// Copyright (c) 2025 Nathan Greenfield. All rights reserved
 #pragma once
 #include <string>
 #include "SMCDoubleList.hpp"
