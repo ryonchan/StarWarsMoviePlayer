@@ -1,5 +1,3 @@
-// Copyright (c) 2025 Nathan Greenfield. All rights reserved
-
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
