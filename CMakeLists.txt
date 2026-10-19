@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Project name
-project(P4)
+project(StarWarsMoviePlayer)
 
 # Build for C++20
 set(CMAKE_CXX_STANDARD 20)

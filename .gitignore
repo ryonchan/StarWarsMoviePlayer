@@ -43,8 +43,8 @@ diff.txt
 *.sdf
 Release/
 Debug/
-.vs/*
-!.vs/launch.vs.json
+.vs/
+.vscode/
 
 # CMake files
 build/
@@ -59,7 +59,5 @@ out
 !output
 !output/readme.txt
 
-# CS20A specific files
-GradeReport.md
-diagnostics.json
-tidy-annotations.json
+# Header accidentally compiled to a precompiled-header file
+src/SMCDoubleList

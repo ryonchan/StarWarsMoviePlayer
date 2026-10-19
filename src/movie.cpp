@@ -153,10 +153,10 @@ void MoviePlayer::loadTape()
         }
         frame = "";
 
-        for (int i = 0; i < 13; i++)
+        for (unsigned i = 0; i < FRAMESIZE; i++)
         {
             std::getline(inFile, line);
-            if (line.back() == '\\')
+            if (!line.empty() && line.back() == '\\')
             {
                 line += " ";
             }
