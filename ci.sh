@@ -1,6 +1,4 @@
 #!/bin/bash
-# Copyright (c) 2025 Nathan Greenfield. All rights reserved
-
 # Pull tests
 wget "https://drive.google.com/uc?export=download&id=1Z0FbFJ_-irByUrx9LC5uFfKuILJ3umG3" -O p4.tar.gz || { echo "::error::Unable to download graded tests. Try again."; exit 1; }
 tar xzf p4.tar.gz || { echo "::error::Error downloading graded tests. Try again."; exit 1; }
