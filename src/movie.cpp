@@ -1,5 +1,3 @@
-// Copyright (c) 2025 Nathan Greenfield. All rights reserved
-
 #include "movie.h"
 #include <stdexcept>
 #include <sstream>
