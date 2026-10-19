@@ -1,6 +1,6 @@
 # Star Wars ASCII Movie Player
 
-C++ player for the ASCII Star Wars movie (15,000+ frames). Frames are stored in a doubly linked list I wrote, so you can play forward, backward, pause, and copy or delete frames while it's running.
+C++ player for the ASCII Star Wars movie (15,000+ frames). Frames are stored in a doubly linked list, you can play forward, backward, pause, and copy or delete frames while it's running.
 
 ## Run
 
