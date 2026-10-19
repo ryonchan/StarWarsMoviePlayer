@@ -1,4 +1,3 @@
-// Copyright (c) 2024 Nathan Greenfield. All rights reserved
 #pragma once
 // Type of events we support
 enum class EventType
