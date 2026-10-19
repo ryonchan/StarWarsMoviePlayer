@@ -1,6 +1,8 @@
 #include "catch.hpp"
 #include "SMCDoubleList.hpp"
 #include <sstream>
+#include <algorithm>
+#include <stdexcept>
 #include <movie.h>
 
 // Helper function declarations (don't change this)
@@ -209,8 +211,8 @@ TEST_CASE("Student tests", "[student]")
 		i = list.begin();
 		++i;
 		++i;
-		list.erase(i);
-		REQUIRE(list.back() == 2);
+		list.erase(i); // list was {2,3,4}; erasing the tail leaves {2,3}
+		REQUIRE(list.back() == 3);
 		REQUIRE(list.size() == 2);
 	}
 }
@@ -219,19 +221,50 @@ TEST_CASE("Student movie", "[student]")
 {
 	SECTION("Bad constructor")
 	{
-		// TODO: Tests go here
-		REQUIRE(true);
+		REQUIRE_THROWS_AS(MoviePlayer("input/does_not_exist.ani"), std::invalid_argument);
 	}
 
 	SECTION("Creating scene 2")
 	{
-		// TODO: Tests go here
-		REQUIRE(true);
+		MoviePlayer player("input/scene2.ani");
+		REQUIRE(player.getNumFrames() == 69); // 36 unique frames expanded by repeat counts
+		REQUIRE(player.getFrameSize() == 13);
+		REQUIRE(player.getCurrFrameNum() == 1);
 	}
 
 	SECTION("Checking frames, scene 2")
 	{
-		// TODO: Tests go here
-		REQUIRE(true);
+		MoviePlayer player("input/scene2.ani");
+		std::string first = player.getCurrFrame();
+		REQUIRE(std::count(first.begin(), first.end(), '\n') == 13);
+
+		player.goBack(); // can't move before the first frame
+		REQUIRE(player.getCurrFrameNum() == 1);
+
+		for (unsigned i = 0; i < 100; i++)
+		{
+			player.goFwrd(); // can't move past the last frame
+		}
+		REQUIRE(player.getCurrFrameNum() == player.getNumFrames());
+
+		player.rewind();
+		REQUIRE(player.getCurrFrameNum() == 1);
+		REQUIRE(player.getCurrFrame() == first);
+	}
+
+	SECTION("Copy and delete frames")
+	{
+		MoviePlayer player("input/scene2.ani");
+		unsigned start = player.getNumFrames();
+		player.copyCurrFrame();
+		REQUIRE(player.getNumFrames() == start + 1);
+		player.delCurrFrame();
+		REQUIRE(player.getNumFrames() == start);
+	}
+
+	SECTION("Full movie loads")
+	{
+		MoviePlayer player("input/starwar.ani");
+		REQUIRE(player.getNumFrames() == 15475);
 	}
 }
