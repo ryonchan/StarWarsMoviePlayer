@@ -4,7 +4,7 @@
 
 A C++20 player for the full ASCII-art *Star Wars: Episode IV*: **15,475 frames** you can play forward, play backward, pause, and edit live by duplicating or deleting frames mid-playback. Every frame is stored in a templated doubly linked list with a custom bidirectional iterator. No STL containers are used.
 
-![Demo of the player running forward, backward, and editing frames](docs/demo.gif)
+![Demo of the player running forward, backward, and editing frames](demo.gif)
 
 ## Highlights
 
